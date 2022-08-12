@@ -72,6 +72,8 @@ class Grammarian:
         :return list[str]: list of posible spells
         """
         alphabet = self.config['alphabets'][self.config['language']]
+        alphabet.append('')
+
         alphabet_regex = self.get_alphabet_regex()
         is_correct_word = self.is_correct_word(token, alphabet_regex)
 
@@ -112,7 +114,7 @@ class Grammarian:
 if __name__ == '__main__':
     grammarian = Grammarian()
 
-    spells = grammarian.execute(spell="boton")
+    spells = grammarian.execute(spell="mango")
 
     for spell in spells:
         print(spell)
