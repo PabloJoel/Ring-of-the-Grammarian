@@ -104,7 +104,7 @@ class Grammarian:
         :param str spell: spell name
         :return list[str]: list of posible spells
         """
-        tokens = wordpunct_tokenize(spell)  # Split the spell into tokens (words)
+        tokens = wordpunct_tokenize(str.lower(spell))  # Split the spell into tokens (words)
 
         new_spells = list()
         for token_index, token in enumerate(tokens):
@@ -115,9 +115,9 @@ class Grammarian:
 if __name__ == '__main__':
     grammarian = Grammarian()
 
-    spells = grammarian.execute(spell="mad monkeys")
+    spells = grammarian.execute(spell="Mad monkeys")
 
     for spell in spells:
-        print(spell)
+        print(spell, len(spells))
 
 
