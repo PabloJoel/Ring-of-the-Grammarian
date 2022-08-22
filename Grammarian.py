@@ -1,3 +1,4 @@
+import copy
 import json
 import re
 import enchant
@@ -71,7 +72,7 @@ class Grammarian:
         :param int current_token_index: index of the token from tokens
         :return list[str]: list of posible spells
         """
-        alphabet = self.config['alphabets'][self.config['language']]
+        alphabet = copy.deepcopy(self.config['alphabets'][self.config['language']])
         alphabet.append('')
 
         alphabet_regex = self.get_alphabet_regex()
@@ -114,7 +115,7 @@ class Grammarian:
 if __name__ == '__main__':
     grammarian = Grammarian()
 
-    spells = grammarian.execute(spell="mango")
+    spells = grammarian.execute(spell="mad monkeys")
 
     for spell in spells:
         print(spell)
