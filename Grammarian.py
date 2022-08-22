@@ -4,7 +4,7 @@ import re
 import enchant
 from nltk.tokenize import wordpunct_tokenize
 
-from Utils.ReadConfig import get_config
+from Utils.FileUtils import get_config
 
 
 def put_together_spell(tokens, new_token, token_index):

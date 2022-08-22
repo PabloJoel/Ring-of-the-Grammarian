@@ -2,7 +2,7 @@ import enchant
 from nltk.tokenize import wordpunct_tokenize
 
 from Grammarian import Grammarian
-from ReadConfig import get_config
+from FileUtils import get_config
 
 
 def check_missing_words(spells_path):

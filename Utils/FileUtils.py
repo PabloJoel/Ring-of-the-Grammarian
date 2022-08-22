@@ -19,8 +19,10 @@ def get_config():
 
     :return dict: configuration
     """
-    root_project_path = os.path.join(get_root_project_path(), 'grammarian_config.ini')
+    config_path = os.path.join(get_root_project_path(), 'grammarian_config.ini')
 
     parser = ConfigParser()
-    parser.read(root_project_path, encoding='utf-8')
+    parser.read(config_path, encoding='utf-8')
     return {section: dict(parser.items(section)) for section in parser.sections()}
+
+
