@@ -4,7 +4,7 @@ import re
 import enchant
 from nltk.tokenize import wordpunct_tokenize
 
-from Utils.FileUtils import get_config
+from Utils.FileUtils import get_config, get_personal_words_path
 
 
 def put_together_spell(tokens, new_token, token_index):
@@ -30,7 +30,10 @@ class Grammarian:
     def __init__(self):
         self.config = get_config()['LANGUAGE CONFIG']
         self.config['alphabets'] = json.loads(self.config['alphabets'])
-        self.dictionary = enchant.Dict(self.config['language'])
+        self.dictionary = enchant.DictWithPWL(
+            self.config['language'],
+            get_personal_words_path(language=self.config['language'])
+        )
 
     def is_correct_word(self, token, regex):
         """

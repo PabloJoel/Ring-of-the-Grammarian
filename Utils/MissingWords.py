@@ -23,6 +23,4 @@ def check_missing_words(spells_path):
     spells = [token for token in tokens if gm.is_correct_word(token=token, regex=gm.get_alphabet_regex())]
 
     config = get_config()
-    # Create dictionary
-    d = enchant.Dict(config['LANGUAGE CONFIG']['language'])
-    return {spell for spell in spells if not d.check(spell)}
+    return {spell for spell in spells if not gm.dictionary.check(spell)}
