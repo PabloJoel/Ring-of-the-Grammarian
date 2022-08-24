@@ -10,8 +10,8 @@ Actualizaciones menores:
 
 Done:
     -Funcionamiento basico
-    -Lectura de texto
     -Funcionamiento desde la consola de comandos
+    -Lectura de un fichero de texto
     -Escribir la salida en un fichero de texto
 
 Packages: pyenchant, nltk, re
