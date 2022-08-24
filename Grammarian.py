@@ -5,6 +5,7 @@ import enchant
 from nltk.tokenize import wordpunct_tokenize
 
 from Utils.FileUtils import get_config, get_personal_words_path
+from Utils.CommandLineParser import get_commandlineparser
 
 
 def put_together_spell(tokens, new_token, token_index):
@@ -88,6 +89,9 @@ class Grammarian:
                 new_tokens = [token[:char_index] + letter + token[char_index + 1:] for letter in alphabet if
                               token[char_index] != letter]
 
+                # Remove empty words
+                new_tokens = [token for token in new_tokens if token != '']
+
                 # Collect only real words
                 new_tokens = [token for token in new_tokens if self.dictionary.check(token)]
 
@@ -109,18 +113,36 @@ class Grammarian:
         """
         tokens = wordpunct_tokenize(str.lower(spell))  # Split the spell into tokens (words)
 
-        new_spells = list()
+        new_spells = [spell]
         for token_index, token in enumerate(tokens):
             new_spells.extend(self.create_words(tokens, token, token_index))
         return new_spells
 
+    def execute_file(self, filepath):
+        """
+        Reads a file from filepath. The file should contains spells separated by new lines.
+        Returns the permutations for all the spells.
+
+        :param str filepath: path to the txt cotaining the spells
+        :return list[str]: list of posible spells for every spell
+        """
+        with open(filepath, 'r') as file:
+            content = file.read().split('\n')
+
+        spells = list()
+        for spell in content:
+            spells.extend(self.execute(spell=spell))
+        return spells
+
 
 if __name__ == '__main__':
-    grammarian = Grammarian()
+    gm = Grammarian()
 
-    spells = grammarian.execute(spell="Mad monkeys")
+    parser = get_commandlineparser()
+    args = parser.parse_args()
 
-    for spell in spells:
-        print(spell, len(spells))
-
+    if args.file is not None:
+        print(gm.execute_file(args.file[0]))
+    elif args.spell is not None:
+        print(gm.execute(args.spell[0]))
 

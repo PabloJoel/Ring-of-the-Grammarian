@@ -1,5 +1,18 @@
-Problemas con el ingles, algunas palabras no estan y los ' y los nombres son problematicos
+Ahora:
+    -Utilizar grammarian desde la consola de comandos
+        -salida: escribir en un fichero
 
-Buscar diccionario en castellano y comprobar esos mismos problemas
+Actualizaciones mayores:
+    -Completar los ficheros de palabras
 
-Utils: missing words
+Actualizaciones menores:
+    -Una utilidad que te busque la carpeta donde se deben guardar los diccionarios
+    -Checkear que el diccionario existe
+    -Obtener el vocabulario de un diccionario, ya sea mediante el diccionario (es_ES.aff) o una libreria
+
+Done:
+    -Funcionamiento basico
+    -Lectura de texto
+    -Funcionamiento desde la consola de comandos
+
+Packages: pyenchant, nltk, re
