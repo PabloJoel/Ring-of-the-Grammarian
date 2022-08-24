@@ -14,5 +14,6 @@ Done:
     -Funcionamiento basico
     -Lectura de texto
     -Funcionamiento desde la consola de comandos
+    -Escribir la salida en un fichero de texto
 
 Packages: pyenchant, nltk, re

@@ -4,7 +4,7 @@ import re
 import enchant
 from nltk.tokenize import wordpunct_tokenize
 
-from Utils.FileUtils import get_config, get_personal_words_path
+from Utils.FileUtils import get_config, get_personal_words_path, write_file
 from Utils.CommandLineParser import get_commandlineparser
 
 
@@ -103,7 +103,7 @@ class Grammarian:
         else:
             return list()
 
-    def execute(self, spell):
+    def execute(self, spell, storepath=None):
         """
         Main function, it takes a spell name and returns a list of changes according to the rules of
         the Ring of the Grammarian.
@@ -116,9 +116,13 @@ class Grammarian:
         new_spells = [spell]
         for token_index, token in enumerate(tokens):
             new_spells.extend(self.create_words(tokens, token, token_index))
+
+        if storepath is not None:
+            write_file(filepath=storepath, spells=new_spells)
+
         return new_spells
 
-    def execute_file(self, filepath):
+    def execute_file(self, filepath, storepath=None):
         """
         Reads a file from filepath. The file should contains spells separated by new lines.
         Returns the permutations for all the spells.
@@ -132,6 +136,10 @@ class Grammarian:
         spells = list()
         for spell in content:
             spells.extend(self.execute(spell=spell))
+
+        if storepath is not None:
+            write_file(filepath=storepath, spells=spells)
+
         return spells
 
 
@@ -141,8 +149,14 @@ if __name__ == '__main__':
     parser = get_commandlineparser()
     args = parser.parse_args()
 
+    if args.output is not None:
+        output = args.output[0]
+    else:
+        output = None
+
     if args.file is not None:
-        print(gm.execute_file(args.file[0]))
+        result = gm.execute_file(args.file[0], storepath=output)
     elif args.spell is not None:
-        print(gm.execute(args.spell[0]))
+        result = gm.execute(args.spell[0], storepath=output)
+
 

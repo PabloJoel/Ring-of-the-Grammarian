@@ -62,3 +62,16 @@ def get_personal_words_path(language):
         personal_words_file.write(personal_words_language.lower())
 
     return personal_words_path
+
+
+def write_file(filepath, spells):
+    """
+    Writes spells separated by new lines into the file filepath.
+
+    :param str filepath: filepath to write to
+    :param list[str] spells: list of spells
+    :return:
+    """
+    with open(filepath, 'w') as f:
+        for spell in spells:
+            f.write(spell + '\n')

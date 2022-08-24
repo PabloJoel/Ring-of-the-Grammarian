@@ -16,5 +16,8 @@ def get_commandlineparser():
     parser.add_argument('-s', "--spell", type=str, nargs=1, metavar="spell_name",
                         help="Transform spell from input.")
 
+    parser.add_argument('-o', "--output", type=str, nargs=1, metavar="output_file_path",
+                        help="Store output to the specified file path.")
+
     return parser
 
